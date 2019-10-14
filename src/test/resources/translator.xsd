@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:example:translator"
+		elementFormDefault="qualified"
+		xmlns="http://www.w3.org/2001/XMLSchema"
+		xmlns:x="urn:example:translator">
+
+    <element name="word" type="x:Word"></element>
+
+    <complexType name="Word">
+    	<simpleContent>
+    		<extension base="string">
+    			<attribute name="lang" type="string"></attribute>
+    		</extension>
+    	</simpleContent>
+    </complexType>
+
+    <element name="words" type="x:Words"></element>
+
+    <complexType name="Words">
+    	<sequence>
+    		<element name="word" type="string" minOccurs="0"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    	<attribute name="lang" type="string" use="required"></attribute>
+    </complexType>
+</schema>
