@@ -11,3 +11,9 @@ Challenges
 Due to architectural setup of Eclipse plugin, it is very difficult to run the project outside of Eclipse Plugin framework.
 
 Lots of code is based on the org.eclipse.wst.wsi.internal.WSITestToolsPlugin.getPlugin detection, hardwired all over the place.
+
+External documentation
+======================
+
+See [Using the WSDL Validator Outside of Eclipse](https://wiki.eclipse.org/Using_the_WSDL_Validator_Outside_of_Eclipse#Configuring_the_WSDL_Validator)
+in Eclipse Wiki.
