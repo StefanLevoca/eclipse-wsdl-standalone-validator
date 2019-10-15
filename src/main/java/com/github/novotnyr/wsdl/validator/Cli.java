@@ -1,13 +1,12 @@
-package com.github.novotnyr.wsdl;
+package com.github.novotnyr.wsdl.validator;
 
-import com.github.novotnyr.wsdl.validator.EclipseWsitWsdlValidator;
 import org.eclipse.wst.wsdl.validation.internal.IValidationMessage;
 import org.eclipse.wst.wsdl.validation.internal.IValidationReport;
 
 import java.io.File;
 import java.net.MalformedURLException;
 
-public class Main {
+public class Cli {
     public static void main(String[] args) throws MalformedURLException {
         if (args.length == 0) {
             System.err.println("Missing file argument");
