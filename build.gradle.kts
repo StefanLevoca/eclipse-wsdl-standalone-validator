@@ -19,4 +19,5 @@ dependencies {
     implementation("xerces:xercesImpl:2.12.0")
     implementation("wsdl4j:wsdl4j:1.6.3")
     implementation("com.ibm.icu:icu4j:64.2")
+    testImplementation("junit:junit:4.12")
 }
