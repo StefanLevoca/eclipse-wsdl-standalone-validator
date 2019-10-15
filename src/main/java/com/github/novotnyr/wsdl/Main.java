@@ -1,11 +1,8 @@
 package com.github.novotnyr.wsdl;
 
 import com.github.novotnyr.wsdl.validator.EclipseWsitWsdlValidator;
-import org.eclipse.wst.wsdl.validation.internal.ClassloaderWSDLValidatorDelegate;
 import org.eclipse.wst.wsdl.validation.internal.IValidationMessage;
 import org.eclipse.wst.wsdl.validation.internal.IValidationReport;
-import org.eclipse.wst.wsdl.validation.internal.WSDLValidator;
-import org.eclipse.wst.wsdl.validation.internal.WSDLValidatorDelegate;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -22,19 +19,10 @@ public class Main {
             System.exit(2);
         }
 
+        EclipseWsitWsdlValidator wsdlValidator = new EclipseWsitWsdlValidator();
+        wsdlValidator.configureWsitPlugin();
 
-        WSDLValidator validator = new WSDLValidator();
-
-        WSDLValidatorDelegate wsiDelegate = new ClassloaderWSDLValidatorDelegate("org.eclipse.wst.wsi.internal.validate.wsdl.WSDLValidator");
-        validator.registerWSDLExtensionValidator("http://schemas.xmlsoap.org/wsdl/", wsiDelegate);
-
-
-        EclipseWsitWsdlValidator eclipseWsitWsdlValidator = new EclipseWsitWsdlValidator();
-        eclipseWsitWsdlValidator.configureWsitPlugin();
-
-
-        IValidationReport report = validator.validate(wsdlFile.toURI().toURL().toString(), null, null);
-
+        IValidationReport report = wsdlValidator.validate(wsdlFile);
         for (IValidationMessage validationMessage : report.getValidationMessages()) {
             System.out.println(validationMessage.getLine() + ":" + validationMessage.getColumn() + "\t" + validationMessage.getMessage());
         }
