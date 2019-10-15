@@ -36,24 +36,9 @@ public class EclipseWsitWsdlValidator {
         this.envelopeProfileValidator = new EnvelopeValidatorImpl();
     }
 
-    private void registerDiscoveryArtifact() {
-        ArtifactType.registerArtifactType("discovery");
-        ProfileValidatorFactoryImpl.addToValidatatorRegistry("discovery", uddiProfileValidator);
-    }
-
-    private void registerDescriptionArtifact() {
-        ArtifactType.registerArtifactType("description");
-        ProfileValidatorFactoryImpl.addToValidatatorRegistry("description", this.wsdlProfileValidator);
-    }
-
-    private void registerMessageArtifact() {
-        ArtifactType.registerArtifactType("message");
-        ProfileValidatorFactoryImpl.addToValidatatorRegistry("message", this.messageProfileValidator);
-    }
-
-    private void registerEnvelopeArtifact() {
-        ArtifactType.registerArtifactType("envelope");
-        ProfileValidatorFactoryImpl.addToValidatatorRegistry("envelope", this.envelopeProfileValidator);
+    private void registerArtifact(String artifactName, BaseValidator validator) {
+        ArtifactType.registerArtifactType(artifactName);
+        ProfileValidatorFactoryImpl.addToValidatatorRegistry(artifactName, validator);
     }
 
     private void registerTadProfiles() {
@@ -63,7 +48,7 @@ public class EclipseWsitWsdlValidator {
         Utils.registerValidProfileTADVersion("Attachments Profile [1.0] (with Basic Profile [1.1] and Simple Soap Binding Profile [1.0]) Test Assertions", "1.0.0");
     }
 
-    public void configureWsitPlugin() {
+    public void initialize() {
         WSITestToolsPlugin wsiTestToolsPlugin = new WSITestToolsPlugin();
         WSITestToolsProperties.setEclipseContext(false);
 
@@ -72,10 +57,11 @@ public class EclipseWsitWsdlValidator {
         configureValidators(wsiTestToolsPlugin);
         configureReportArtifactTypes(wsiTestToolsPlugin);
 
-        registerDescriptionArtifact();
-        registerDiscoveryArtifact();
-        registerEnvelopeArtifact();
-        registerMessageArtifact();
+        registerArtifact("description", this.wsdlProfileValidator);
+        registerArtifact("discovery", this.uddiProfileValidator);
+        registerArtifact("message", this.messageProfileValidator);
+        registerArtifact("envelope", this.envelopeProfileValidator);
+
         registerTadProfiles();
         configureEntryTypes();
 

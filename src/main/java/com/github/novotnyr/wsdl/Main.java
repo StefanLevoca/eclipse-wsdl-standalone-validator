@@ -20,7 +20,7 @@ public class Main {
         }
 
         EclipseWsitWsdlValidator wsdlValidator = new EclipseWsitWsdlValidator();
-        wsdlValidator.configureWsitPlugin();
+        wsdlValidator.initialize();
 
         IValidationReport report = wsdlValidator.validate(wsdlFile);
         for (IValidationMessage validationMessage : report.getValidationMessages()) {
